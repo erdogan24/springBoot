@@ -18,6 +18,19 @@ public class UserServiceImpl implements UserService {
     UserRepository userRepository;
     @Override
     public List<User> getAllUser() {
+        log.info("Tüm userler çağrıldı");
         return userRepository.findAll();
+    }
+
+    @Override
+    public void delete(long id) {
+        log.info(id +" id ' li user silindi ! ");
+        userRepository.deleteById(id);
+    }
+
+    @Override
+    public User registerAUser(User user) {
+        log.info(" Bakim kaydı yapıldı.!"+user.toString());
+        return userRepository.save(user);
     }
 }
