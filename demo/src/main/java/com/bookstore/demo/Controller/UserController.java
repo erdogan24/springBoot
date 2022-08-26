@@ -23,7 +23,7 @@ public class UserController {
         return ResponseEntity.ok().body(user);
     }
 
-    @PutMapping("/ınsertUser/{id}")
+    @PutMapping("/updateUser/{id}")
     public ResponseEntity<?> update(@PathVariable("id") User id, @RequestBody User user) {
         User userUpdate = userService.registerAUser(id);
         return ResponseEntity.ok().body(userUpdate);
