@@ -4,7 +4,6 @@ import com.bookstore.demo.Repository.UserRepository;
 import com.bookstore.demo.model.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,8 +13,12 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
     private static final Logger log = LogManager.getLogger(UserServiceImpl.class);
 
-    @Autowired
-    UserRepository userRepository;
+    final UserRepository userRepository;
+
+    public UserServiceImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
     @Override
     public List<User> getAllUser() {
         log.info("Tüm userler çağrıldı");
@@ -30,7 +33,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User registerAUser(User user) {
-        log.info(" Bakim kaydı yapıldı.!"+user.toString());
+        log.info("User kaydı yapıldı.!"+user.toString());
+        return userRepository.save(user);
+    }
+
+    @Override
+    public User update(User user) {
+        log.info(" User güncelendi.!"+user.toString());
         return userRepository.save(user);
     }
 }
